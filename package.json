@@ -1,0 +1,18 @@
+{
+  "name": "valleycms",
+  "version": "0.0.1",
+  "description": "A Content Management System for modern content websites",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ."
+  },
+  "author": "EntropyValley",
+  "license": "ISC",
+  "dependencies": {
+    "acebase": "^1.28.1",
+    "bcrypt": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.2",
+    "uuid": "^9.0.0"
+  }
+}
