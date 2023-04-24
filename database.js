@@ -46,7 +46,8 @@ async function createUser(username, password,
         phone: phone,
         sessions: [
             newSession
-        ]
+        ],
+        role: 'unauthorized'
     }
 
     userCollection.push(user)
