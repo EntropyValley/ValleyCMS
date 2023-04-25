@@ -2,7 +2,7 @@ const { AceBase } = require('acebase');
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
 
-const db = new AceBase('data');
+const db = new AceBase('data', {sponsor: true, logLevel: 'warn'});
 
 // Database Collections
 const userCollection = db.ref('users');

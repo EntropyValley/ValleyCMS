@@ -1,4 +1,5 @@
 const database = require('./database.js');
+const eta = require('eta')
 
 // Handle User Creation
 async function endpoint_createUser(req, res) {
@@ -52,9 +53,47 @@ function setAuthCookie(res, sessionToken) {
     });
 }
 
+async function middleware_secure(req, res, next) {
+    const currentUser = await getCurrentUser(req);
+
+    if (currentUser) {
+        next();
+    } else {
+        res.redirect('/login')
+    }
+}
+
+async function route_login(req, res) {
+    const currentUser = await getCurrentUser(req);
+
+    if (currentUser) {
+        res.redirect('/portal');
+    } else {
+        res.send(`Test: ${currentUser}`);
+    }
+}
+
+async function route_create(req, res) {
+    const currentUser = await getCurrentUser(req);
+
+    if (currentUser) {
+        res.redirect('/portal');
+    } else {
+        res.send(`Test: ${currentUser}`);
+    }
+}
+
+async function getCurrentUser(req) {
+    const session = req.cookies['session'];
+    return await database.getUserBySession(session);
+}
+
 // Module Exports
 module.exports = {
     endpoint_createUser,
     endpoint_loginUser,
-    endpoint_logoutUser
+    endpoint_logoutUser,
+    middleware_secure,
+    route_login,
+    route_create
 }
