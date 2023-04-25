@@ -4,7 +4,7 @@
   "description": "A Content Management System for modern content websites",
   "main": "index.js",
   "scripts": {
-    "test": "node ."
+    "test": "nodemon ."
   },
   "author": "EntropyValley",
   "license": "ISC",
@@ -15,5 +15,8 @@
     "eta": "^2.0.1",
     "express": "^4.18.2",
     "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
   }
 }
