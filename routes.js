@@ -13,7 +13,8 @@ function sanitize_path(path) {
 
 // Script Route - serves page scripts
 async function route_scripts(req, res) {
-    const path = sanitize_path(req.originalUrl.substring(9));
+    const rawPath = req.originalUrl;
+    const path = sanitize_path(rawPath.substring(1, rawPath.length - 3));
 
     res.setHeader('content-type', 'application/javascript');
     res.send(path)
@@ -21,7 +22,8 @@ async function route_scripts(req, res) {
 
 // Style Route - serves page styles
 async function route_styles(req, res) {
-    const path = sanitize_path(req.originalUrl.substring(8));
+    const rawPath = req.originalUrl;
+    const path = sanitize_path(rawPath.substring(1, rawPath.length - 4));
 
     res.setHeader('content-type', 'text/css');
     res.send(path)
