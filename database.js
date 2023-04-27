@@ -55,6 +55,7 @@ async function createUser(username, password,
     return [user, newSession]
 }
 
+// Create a new session for the given user
 async function generateNewSessionForUser(username) {
     const newSession = uuid.v4()
 
@@ -93,11 +94,25 @@ async function clearUserSessionToken(session) {
     });
 }
 
+// Get Site Name
+async function getSiteName() {
+    const snapshot = await db.ref('config/site/name').get();
+    const defaultName = 'My New Site';
+
+    if (snapshot.exists()) {
+        return snapshot.val();
+    } else {
+        await db.ref('config/site/name').set(defaultName);
+        return defaultName;
+    }
+}
+
 // Module Exports
 module.exports = {
     getUserByUsername,
     getUserBySession,
     createUser,
     generateNewSessionForUser,
-    clearUserSessionToken
+    clearUserSessionToken,
+    getSiteName
 }
