@@ -1,0 +1,4 @@
+<head>
+    <title><%= it.page?.title %> | <%= it.site?.name %></title>
+    <link rel="stylesheet" href="<%= it.page.path %>.css"/>
+</head>

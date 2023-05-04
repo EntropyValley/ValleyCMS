@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<%~ it.components.head %>
+<body>
+    <div id="form">
+        <div class="form-item">
+            <p class="form-item-title">Username</p>
+            <input id="form-login-username" class="form-item-input" type="text"/>
+        </div>
+        <div class="form-item">
+            <p class="form-item-title">Password</p>
+            <input id="form-login-password" class="form-item-input" type="text"/>
+        </div>
+    </div>
+</body>

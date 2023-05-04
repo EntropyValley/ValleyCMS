@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<%~ it.components.head %>
+<body>
+    <div id="form">
+        <div class="form-item">
+            <p class="form-item-title">First Name</p>
+            <input id="form-create-name-first" class="form-item-input" type="text"/>
+        </div>
+        <div class="form-item">
+            <p class="form-item-title">Last Name</p>
+            <input id="form-create-name-last" class="form-item-input" type="text"/>
+        </div>
+        <div class="form-item">
+            <p class="form-item-title">Preferred Name</p>
+            <input id="form-create-name-preferred" class="form-item-input" type="text"/>
+        </div>
+        <div class="form-item">
+            <p class="form-item-title">Email</p>
+            <input id="form-create-email" class="form-item-input" type="text"/>
+        </div>
+        <div class="form-item">
+            <p class="form-item-title">Username</p>
+            <input id="form-create-username" class="form-item-input" type="text"/>
+        </div>
+        <div class="form-item">
+            <p class="form-item-title">Password</p>
+            <input id="form-create-password" class="form-item-input" type="text"/>
+        </div>
+        <div class="form-item">
+            <p class="form-item-title">Confirm Password</p>
+            <input id="form-create-confirmation" class="form-item-input" type="text"/>
+        </div>
+    </div>
+</body>

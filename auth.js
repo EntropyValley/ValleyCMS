@@ -1,5 +1,5 @@
 const database = require('./database.js');
-const eta = require('eta')
+const { eta, ...templating } = require('./templating.js');
 
 // Handle User Creation
 async function endpoint_createUser(req, res) {
@@ -53,6 +53,7 @@ function setAuthCookie(res, sessionToken) {
     });
 }
 
+// Used to require authentication on a given route / router
 async function middleware_secure(req, res, next) {
     const currentUser = await getCurrentUser(req);
 
@@ -63,29 +64,52 @@ async function middleware_secure(req, res, next) {
     }
 }
 
+// Login page / route
 async function route_login(req, res) {
     const currentUser = await getCurrentUser(req);
 
     if (currentUser) {
         res.redirect('/portal');
     } else {
-        res.send(`Test: ${currentUser}`);
+        res.send(await eta.renderFile('login_html', await templating.generateTemplateData(req, {
+            page: {
+                title: 'Login',
+                path: req.originalUrl
+            }
+        })));
     }
 }
 
+// Account creation page / route
 async function route_create(req, res) {
     const currentUser = await getCurrentUser(req);
 
     if (currentUser) {
         res.redirect('/portal');
     } else {
-        res.send(`Test: ${currentUser}`);
+        res.send(await eta.renderFile('create_html', await templating.generateTemplateData(req, {
+            page: {
+                title: 'Create Account',
+                path: req.originalUrl
+            }
+        })));
     }
 }
 
+// Get the current user by session
 async function getCurrentUser(req) {
     const session = req.cookies['session'];
     return await database.getUserBySession(session);
+}
+
+async function route_css_accountForm(req, res) {
+    res.setHeader('content-type', 'text/css');
+    res.send(await eta.renderFile('accountForm_css', await templating.generateTemplateData(req, {
+        page: {
+            title: 'Account',
+            path: req.originalUrl
+        }
+    })));
 }
 
 // Module Exports
@@ -95,5 +119,6 @@ module.exports = {
     endpoint_logoutUser,
     middleware_secure,
     route_login,
-    route_create
+    route_create,
+    route_css_accountForm
 }

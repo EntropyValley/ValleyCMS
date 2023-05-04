@@ -1,1 +1,1 @@
-const eta = require('eta');
+const {eta, ...templating} = require('./templating.js');

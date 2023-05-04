@@ -94,16 +94,34 @@ async function clearUserSessionToken(session) {
     });
 }
 
-// Get Site Name
+// Get Site Name configuration field
 async function getSiteName() {
-    const snapshot = await db.ref('config/site/name').get();
-    const defaultName = 'My New Site';
+    return await getOrSetDatabaseValue('config/site/name', 'My New Site');
+}
+
+// Get Background Color configuration field
+async function getColor_background() {
+    console.log(await getOrSetDatabaseValue('config/colors/background', 'rgba(187, 187, 187, 1)'));
+}
+
+// Get Gradient Color configuration fields
+async function getColor_gradient() {
+    return {
+        a: await getOrSetDatabaseValue('config/colors/gradient/a', 'rgba(156,25,180,1)'),
+        b: await getOrSetDatabaseValue('config/colors/gradient/b', 'rgba(141,0,255,1)'),
+        angle: await getOrSetDatabaseValue('config/colors/gradient/angle', '130')
+    }
+}
+
+
+async function getOrSetDatabaseValue(path, defaultValue) {
+    const snapshot = await db.ref(path).get();
 
     if (snapshot.exists()) {
         return snapshot.val();
     } else {
-        await db.ref('config/site/name').set(defaultName);
-        return defaultName;
+        await db.ref(path).set(defaultValue);
+        return defaultValue;
     }
 }
 
@@ -114,5 +132,7 @@ module.exports = {
     createUser,
     generateNewSessionForUser,
     clearUserSessionToken,
-    getSiteName
+    getSiteName,
+    getColor_background,
+    getColor_gradient
 }

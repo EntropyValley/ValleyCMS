@@ -1,0 +1,13 @@
+/* <%= it.page.title %> Page Styles - ValleyCMS */
+
+body {
+    background: linear-gradient( <%= it.colors.gradient.angle %>deg, <%= it.colors.gradient.a %> 0%, <%= it.colors.gradient.b %> 100%);
+    background-size: 115vw, 115vh;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+#form {
+    position: fixed;
+    background: <% it.colors.background %>;
+}
